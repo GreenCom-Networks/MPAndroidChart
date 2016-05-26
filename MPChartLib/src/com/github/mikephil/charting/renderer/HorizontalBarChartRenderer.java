@@ -42,7 +42,7 @@ public class HorizontalBarChartRenderer extends BarChartRenderer {
             IBarDataSet set = barData.getDataSetByIndex(i);
             mBarBuffers[i] = new HorizontalBarBuffer(set.getEntryCount() * 4 * (set.isStacked() ? set.getStackSize() : 1),
                     barData.getGroupSpace(),
-                    barData.getDataSetCount(), set.isStacked());
+                    barData.getDataSetCount(), set.isStacked(), barData.allowSuperposition());
         }
     }
 
