@@ -357,8 +357,7 @@ public class BarChartRenderer extends DataRenderer {
                 int index = high.getXIndex();
 
                 // check outofbounds
-                if (index >= 0
-                        && index < (mChart.getXChartMax() * mAnimator.getPhaseX()) / setCount) {
+                if (index >= 0 && (index < (mChart.getXChartMax() * mAnimator.getPhaseX()) / setCount)) {
 
                     BarEntry e = set.getEntryForXIndex(index);
 
@@ -368,9 +367,16 @@ public class BarChartRenderer extends DataRenderer {
                     float groupspace = barData.getGroupSpace();
                     boolean isStack = high.getStackIndex() < 0 ? false : true;
 
-                    // calculate the correct x-position
-                    float x = index * setCount + dataSetIndex + groupspace / 2f
-                            + groupspace * index;
+                    float x;
+
+                    if(barData.allowSuperposition()) {
+                        x = e.getXIndex();
+                    } else {
+                        // calculate the correct x-position
+                        x = index * setCount + dataSetIndex + groupspace / 2f
+                                + groupspace * index;
+                    }
+
 
                     final float y1;
                     final float y2;
