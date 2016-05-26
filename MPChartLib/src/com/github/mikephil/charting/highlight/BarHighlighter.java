@@ -63,7 +63,7 @@ public class BarHighlighter extends ChartHighlighter<BarDataProvider> {
 	@Override
 	protected int getXIndex(float x) {
 
-		if (!mChart.getBarData().isGrouped()) {
+		if (!mChart.getBarData().isGrouped() || mChart.getBarData().allowSuperposition()) {
 			return super.getXIndex(x);
 		} else {
 
