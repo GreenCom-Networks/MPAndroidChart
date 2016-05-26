@@ -21,6 +21,8 @@ public class BarData extends BarLineScatterCandleBubbleData<IBarDataSet> {
     // */
     // private float mMaximumBarWidth = 100f;
 
+    private boolean mAllowSuperposition = false;
+
     public BarData() {
         super();
     }
@@ -53,6 +55,14 @@ public class BarData extends BarLineScatterCandleBubbleData<IBarDataSet> {
         List<IBarDataSet> sets = new ArrayList<IBarDataSet>();
         sets.add(dataSet);
         return sets;
+    }
+
+    public boolean allowSuperposition() {
+        return mAllowSuperposition;
+    }
+
+    public void setAllowSuperposition(boolean mAllowSuperposition) {
+        this.mAllowSuperposition = mAllowSuperposition;
     }
 
     /**

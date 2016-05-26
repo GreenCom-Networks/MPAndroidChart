@@ -12,12 +12,14 @@ public class BarBuffer extends AbstractBuffer<IBarDataSet> {
     protected int mDataSetCount = 1;
     protected boolean mContainsStacks = false;
     protected boolean mInverted = false;
+    protected boolean mAllowSuperposition = false;
 
-    public BarBuffer(int size, float groupspace, int dataSetCount, boolean containsStacks) {
+    public BarBuffer(int size, float groupspace, int dataSetCount, boolean containsStacks, boolean allowSuperposition) {
         super(size);
         this.mGroupSpace = groupspace;
         this.mDataSetCount = dataSetCount;
         this.mContainsStacks = containsStacks;
+        this.mAllowSuperposition = allowSuperposition;
     }
 
     public void setBarSpace(float barspace) {
@@ -54,9 +56,15 @@ public class BarBuffer extends AbstractBuffer<IBarDataSet> {
 
             BarEntry e = data.getEntryForIndex(i);
 
-            // calculate the x-position, depending on datasetcount
-            float x = e.getXIndex() + e.getXIndex() * dataSetOffset + mDataSetIndex
-                    + mGroupSpace * e.getXIndex() + groupSpaceHalf;
+            float x;
+            if(mAllowSuperposition) {
+                x = e.getXIndex();
+            } else {
+                // calculate the x-position, depending on datasetcount
+                x = e.getXIndex() + e.getXIndex() * dataSetOffset + mDataSetIndex
+                        + mGroupSpace * e.getXIndex() + groupSpaceHalf;
+            }
+
             float y = e.getVal();
             float [] vals = e.getVals();
                 

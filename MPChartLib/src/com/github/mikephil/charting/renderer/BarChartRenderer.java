@@ -61,7 +61,7 @@ public class BarChartRenderer extends DataRenderer {
             IBarDataSet set = barData.getDataSetByIndex(i);
             mBarBuffers[i] = new BarBuffer(set.getEntryCount() * 4 * (set.isStacked() ? set.getStackSize() : 1),
                     barData.getGroupSpace(),
-                    barData.getDataSetCount(), set.isStacked());
+                    barData.getDataSetCount(), set.isStacked(), barData.allowSuperposition());
         }
     }
 
