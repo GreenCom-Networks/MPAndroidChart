@@ -7,6 +7,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
+import android.util.Log;
 
 import com.github.mikephil.charting.animation.ChartAnimator;
 import com.github.mikephil.charting.buffer.BarBuffer;
@@ -360,7 +361,8 @@ public class BarChartRenderer extends DataRenderer {
                 if (index >= 0 && ((index < (mChart.getXChartMax() * mAnimator.getPhaseX()) / setCount) || barData.allowSuperposition())) {
 
                     BarEntry e = set.getEntryForXIndex(index);
-
+                    Log.v("e.xIndex", e.getXIndex()+"");
+                    Log.v("INDEX", index+"");
                     if (e == null || e.getXIndex() != index)
                         continue;
 
@@ -371,7 +373,7 @@ public class BarChartRenderer extends DataRenderer {
                     float x;
 
                     if(barData.allowSuperposition()) {
-                        x = e.getXIndex();
+                        x = index;
                     } else {
                         // calculate the correct x-position
                         x = index * setCount + dataSetIndex + groupspace / 2f
