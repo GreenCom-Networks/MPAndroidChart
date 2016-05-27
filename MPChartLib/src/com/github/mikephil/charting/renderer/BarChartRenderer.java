@@ -328,15 +328,19 @@ public class BarChartRenderer extends DataRenderer {
 
         BarData barData = mChart.getBarData();
         int setCount = barData.getDataSetCount();
+        if(barData.allowSuperposition() && setCount > 1) {
+            setCount = 1;
+        }
 
         for (Highlight high : indices) {
 
-            final int minDataSetIndex = high.getDataSetIndex() == -1
+            int minDataSetIndex = high.getDataSetIndex() == -1
                     ? 0
                     : high.getDataSetIndex();
-            final int maxDataSetIndex = high.getDataSetIndex() == -1
+            int maxDataSetIndex = high.getDataSetIndex() == -1
                     ? barData.getDataSetCount()
                     : (high.getDataSetIndex() + 1);
+
             if (maxDataSetIndex - minDataSetIndex < 1) continue;
 
             for (int dataSetIndex = minDataSetIndex;
@@ -358,7 +362,7 @@ public class BarChartRenderer extends DataRenderer {
                 int index = high.getXIndex();
 
                 // check outofbounds
-                if (/*index >= 0 && ((index < (mChart.getXChartMax() * mAnimator.getPhaseX()) / setCount) ||*/ barData.allowSuperposition()) {
+                if (index >= 0 && ((index < (mChart.getXChartMax() * mAnimator.getPhaseX()) / setCount) || barData.allowSuperposition())) {
 
                     BarEntry e = set.getEntryForXIndex(index);
                     if (e == null || e.getXIndex() != index)
