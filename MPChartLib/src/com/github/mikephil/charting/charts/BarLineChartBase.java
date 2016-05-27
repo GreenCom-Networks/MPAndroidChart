@@ -587,7 +587,12 @@ public abstract class BarLineChartBase<T extends BarLineScatterCandleBubbleData<
                 xPos *= mAnimator.getPhaseY();
             } else {
 
-                float x = i + i * (setCount - 1) + dataSetIndex + space * i + space / 2f;
+                float x;
+                if(bd.allowSuperposition()) {
+                    x = i;
+                } else {
+                    x = i + i * (setCount - 1) + dataSetIndex + space * i + space / 2f;
+                }
 
                 xPos = x;
 
