@@ -328,9 +328,6 @@ public class BarChartRenderer extends DataRenderer {
 
         BarData barData = mChart.getBarData();
         int setCount = barData.getDataSetCount();
-        if(barData.allowSuperposition() && setCount > 1) {
-            setCount = 1;
-        }
 
         for (Highlight high : indices) {
 
@@ -374,7 +371,7 @@ public class BarChartRenderer extends DataRenderer {
                     float x;
 
                     if(barData.allowSuperposition()) {
-                        x = index;
+                        x = e.getXIndex();
                     } else {
                         // calculate the correct x-position
                         x = index * setCount + dataSetIndex + groupspace / 2f
