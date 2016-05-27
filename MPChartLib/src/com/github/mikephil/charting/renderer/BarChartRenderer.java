@@ -358,11 +358,9 @@ public class BarChartRenderer extends DataRenderer {
                 int index = high.getXIndex();
 
                 // check outofbounds
-                if (index >= 0 && ((index < (mChart.getXChartMax() * mAnimator.getPhaseX()) / setCount) || barData.allowSuperposition())) {
+                if (/*index >= 0 && ((index < (mChart.getXChartMax() * mAnimator.getPhaseX()) / setCount) ||*/ barData.allowSuperposition()) {
 
                     BarEntry e = set.getEntryForXIndex(index);
-                    Log.v("e.xIndex", e.getXIndex()+"");
-                    Log.v("INDEX", index+"");
                     if (e == null || e.getXIndex() != index)
                         continue;
 
