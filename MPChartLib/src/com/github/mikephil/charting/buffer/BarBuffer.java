@@ -47,7 +47,7 @@ public class BarBuffer extends AbstractBuffer<IBarDataSet> {
 
         float size = data.getEntryCount() * phaseX;
 
-        int dataSetOffset = (mDataSetCount - 1);
+        int dataSetOffset = mAllowSuperposition ? 0 : (mDataSetCount - 1);
         float barSpaceHalf = mBarSpace / 2f;
         float groupSpaceHalf = mGroupSpace / 2f;
         float barWidth = 0.5f;
