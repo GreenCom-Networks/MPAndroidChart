@@ -98,6 +98,9 @@ public class BarData extends BarLineScatterCandleBubbleData<IBarDataSet> {
      * @return
      */
     public boolean isGrouped() {
+        if(allowSuperposition()) {
+            return false;
+        }
         return mDataSets.size() > 1 ? true : false;
     }
     
