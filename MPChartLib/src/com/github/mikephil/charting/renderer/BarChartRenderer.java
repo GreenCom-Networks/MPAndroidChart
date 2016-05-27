@@ -367,7 +367,6 @@ public class BarChartRenderer extends DataRenderer {
                         continue;
 
                     float groupspace = barData.getGroupSpace();
-                    int dataSetOffset = barData.allowSuperposition() ? 0 : dataSetIndex;
                     boolean isStack = high.getStackIndex() < 0 ? false : true;
 
                     float x;

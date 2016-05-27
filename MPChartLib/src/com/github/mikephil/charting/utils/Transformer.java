@@ -234,9 +234,15 @@ public class Transformer {
             Entry e = data.getEntryForIndex(j / 2);
             int i = e.getXIndex();
 
-            // calculate the x-position, depending on datasetcount
-            float x = e.getXIndex() + i * (setCount - 1) + dataSetIndex + space * i
-                    + space / 2f;
+            float x;
+
+            if(bd.allowSuperposition()) {
+                x = i;
+            } else {
+                // calculate the x-position, depending on datasetcount
+                x = e.getXIndex() + i * (setCount - 1) + dataSetIndex + space * i
+                        + space / 2f;
+            }
             float y = e.getVal();
 
             valuePoints[j] = x;
