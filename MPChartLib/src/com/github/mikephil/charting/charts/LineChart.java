@@ -48,6 +48,11 @@ public class LineChart extends BarLineChartBase<LineData> implements LineDataPro
     }
 
     @Override
+    public LineData getLineFilledData() {
+        return mData;
+    }
+
+    @Override
     protected void onDetachedFromWindow() {
         // releases the bitmap in the renderer to avoid oom error
         if(mRenderer != null && mRenderer instanceof LineChartRenderer) {

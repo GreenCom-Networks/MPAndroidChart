@@ -46,7 +46,7 @@ public class CombinedChart extends BarLineChartBase<CombinedData> implements Lin
     private boolean mDrawBarShadow = false;
 
     protected DrawOrder[] mDrawOrder = new DrawOrder[]{
-            DrawOrder.BAR, DrawOrder.BUBBLE, DrawOrder.LINE, DrawOrder.CANDLE, DrawOrder.SCATTER
+            DrawOrder.BAR, DrawOrder.BUBBLE, DrawOrder.LINE, DrawOrder.LINE_FILLED, DrawOrder.CANDLE, DrawOrder.SCATTER
     };
 
     /**
@@ -54,7 +54,7 @@ public class CombinedChart extends BarLineChartBase<CombinedData> implements Lin
      * for the combined-chart are drawn
      */
     public enum DrawOrder {
-        BAR, BUBBLE, LINE, CANDLE, SCATTER
+        BAR, BUBBLE, LINE, LINE_FILLED, CANDLE, SCATTER
     }
 
     public CombinedChart(Context context) {
@@ -127,6 +127,14 @@ public class CombinedChart extends BarLineChartBase<CombinedData> implements Lin
         if (mData == null)
             return null;
         return mData.getLineData();
+    }
+
+    @Override
+    public LineData getLineFilledData() {
+        if(mData == null) {
+            return null;
+        }
+        return mData.getLineFilledData();
     }
 
     @Override

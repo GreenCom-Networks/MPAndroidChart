@@ -44,6 +44,9 @@ public class LineChartRenderer extends LineRadarRenderer {
      */
     protected Canvas mBitmapCanvas;
 
+
+    protected LineData mLineData;
+
     /**
      * the bitmap configuration to be used
      */
@@ -56,6 +59,7 @@ public class LineChartRenderer extends LineRadarRenderer {
                              ViewPortHandler viewPortHandler) {
         super(animator, viewPortHandler);
         mChart = chart;
+        mLineData = chart.getLineData();
 
         mCirclePaintInner = new Paint(Paint.ANTI_ALIAS_FLAG);
         mCirclePaintInner.setStyle(Paint.Style.FILL);
@@ -87,9 +91,8 @@ public class LineChartRenderer extends LineRadarRenderer {
 
         mDrawBitmap.get().eraseColor(Color.TRANSPARENT);
 
-        LineData lineData = mChart.getLineData();
 
-        for (ILineDataSet set : lineData.getDataSets()) {
+        for (ILineDataSet set : mLineData.getDataSets()) {
 
             if (set.isVisible() && set.getEntryCount() > 0)
                 drawDataSet(c, set);
@@ -533,10 +536,10 @@ public class LineChartRenderer extends LineRadarRenderer {
     @Override
     public void drawValues(Canvas c) {
 
-        if (mChart.getLineData().getYValCount() < mChart.getMaxVisibleCount()
+        if (mLineData.getYValCount() < mChart.getMaxVisibleCount()
                 * mViewPortHandler.getScaleX()) {
 
-            List<ILineDataSet> dataSets = mChart.getLineData().getDataSets();
+            List<ILineDataSet> dataSets = mLineData.getDataSets();
 
             for (int i = 0; i < dataSets.size(); i++) {
 
@@ -605,7 +608,7 @@ public class LineChartRenderer extends LineRadarRenderer {
 
         float[] circlesBuffer = new float[2];
 
-        List<ILineDataSet> dataSets = mChart.getLineData().getDataSets();
+        List<ILineDataSet> dataSets = mLineData.getDataSets();
 
         for (int i = 0; i < dataSets.size(); i++) {
 
@@ -698,15 +701,13 @@ public class LineChartRenderer extends LineRadarRenderer {
     @Override
     public void drawHighlighted(Canvas c, Highlight[] indices) {
 
-        LineData lineData = mChart.getLineData();
-
         for (Highlight high : indices) {
 
             final int minDataSetIndex = high.getDataSetIndex() == -1
                     ? 0
                     : high.getDataSetIndex();
             final int maxDataSetIndex = high.getDataSetIndex() == -1
-                    ? lineData.getDataSetCount()
+                    ? mLineData.getDataSetCount()
                     : (high.getDataSetIndex() + 1);
             if (maxDataSetIndex - minDataSetIndex < 1) continue;
 
@@ -714,7 +715,7 @@ public class LineChartRenderer extends LineRadarRenderer {
                  dataSetIndex < maxDataSetIndex;
                  dataSetIndex++) {
 
-                ILineDataSet set = lineData.getDataSetByIndex(dataSetIndex);
+                ILineDataSet set = mLineData.getDataSetByIndex(dataSetIndex);
 
                 if (set == null || !set.isHighlightEnabled())
                     continue;

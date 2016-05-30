@@ -53,7 +53,7 @@ public class CombinedChartActivity extends DemoBase {
         
         // draw bars behind lines
         mChart.setDrawOrder(new DrawOrder[] {
-                DrawOrder.BAR, DrawOrder.BUBBLE, DrawOrder.CANDLE, DrawOrder.LINE, DrawOrder.SCATTER
+                DrawOrder.LINE_FILLED, DrawOrder.BAR, DrawOrder.LINE,  DrawOrder.BUBBLE, DrawOrder.CANDLE,  DrawOrder.SCATTER
         });
 
         YAxis rightAxis = mChart.getAxisRight();
@@ -71,12 +71,43 @@ public class CombinedChartActivity extends DemoBase {
 
         data.setData(generateLineData());
         data.setData(generateBarData());
+        data.setLineFilledData(generateLineFilledData());
 //        data.setData(generateBubbleData());
 //         data.setData(generateScatterData());
 //         data.setData(generateCandleData());
 
         mChart.setData(data);
         mChart.invalidate();
+    }
+
+    private LineData generateLineFilledData() {
+
+        LineData d = new LineData();
+
+        ArrayList<Entry> entries = new ArrayList<Entry>();
+
+        for (int index = 0; index < itemcount; index++)
+            entries.add(new Entry(getRandom(15, 10), index));
+
+        LineDataSet set = new LineDataSet(entries, "Line DataSet");
+        set.setColor(Color.rgb(255, 0, 0));
+        set.setLineWidth(2.5f);
+        set.setCircleColor(Color.rgb(255, 0, 0));
+        set.setCircleRadius(5f);
+        set.setFillColor(Color.rgb(255, 0, 0));
+        set.setDrawCubic(false);
+        set.setDrawFilled(true);
+        set.setFillAlpha(255);
+        set.setDrawCircles(false);
+        set.setDrawValues(true);
+        set.setValueTextSize(10f);
+        set.setValueTextColor(Color.rgb(255, 0, 0));
+
+        set.setAxisDependency(YAxis.AxisDependency.LEFT);
+
+        d.addDataSet(set);
+
+        return d;
     }
 
     private LineData generateLineData() {

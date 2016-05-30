@@ -16,6 +16,7 @@ import java.util.List;
 public class CombinedData extends BarLineScatterCandleBubbleData<IBarLineScatterCandleBubbleDataSet<?>> {
 
     private LineData mLineData;
+    private LineData mLineFilledData;
     private BarData mBarData;
     private ScatterData mScatterData;
     private CandleData mCandleData;
@@ -35,6 +36,12 @@ public class CombinedData extends BarLineScatterCandleBubbleData<IBarLineScatter
 
     public void setData(LineData data) {
         mLineData = data;
+        mDataSets.addAll(data.getDataSets());
+        init();
+    }
+
+    public void setLineFilledData(LineData data) {
+        mLineFilledData = data;
         mDataSets.addAll(data.getDataSets());
         init();
     }
@@ -71,6 +78,10 @@ public class CombinedData extends BarLineScatterCandleBubbleData<IBarLineScatter
         return mLineData;
     }
 
+    public LineData getLineFilledData() {
+        return mLineFilledData;
+    }
+
     public BarData getBarData() {
         return mBarData;
     }
@@ -92,6 +103,8 @@ public class CombinedData extends BarLineScatterCandleBubbleData<IBarLineScatter
         List<ChartData> data = new ArrayList<ChartData>();
         if(mLineData != null)
             data.add(mLineData);
+        if(mLineFilledData != null)
+            data.add(mLineFilledData);
         if(mBarData != null)
             data.add(mBarData);
         if(mScatterData != null)
@@ -108,6 +121,8 @@ public class CombinedData extends BarLineScatterCandleBubbleData<IBarLineScatter
     public void notifyDataChanged() {
         if (mLineData != null)
             mLineData.notifyDataChanged();
+        if(mLineFilledData != null)
+            mLineFilledData.notifyDataChanged();
         if (mBarData != null)
             mBarData.notifyDataChanged();
         if (mCandleData != null)
