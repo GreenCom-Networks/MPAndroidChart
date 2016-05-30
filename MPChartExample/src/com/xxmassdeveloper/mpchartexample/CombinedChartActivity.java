@@ -25,6 +25,7 @@ import com.github.mikephil.charting.data.CombinedData;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.data.LineFilledDataSet;
 import com.github.mikephil.charting.data.ScatterData;
 import com.github.mikephil.charting.data.ScatterDataSet;
 import com.github.mikephil.charting.interfaces.datasets.IDataSet;
@@ -89,14 +90,13 @@ public class CombinedChartActivity extends DemoBase {
         for (int index = 0; index < itemcount; index++)
             entries.add(new Entry(getRandom(15, 10), index));
 
-        LineDataSet set = new LineDataSet(entries, "Line DataSet");
+        LineFilledDataSet set = new LineFilledDataSet(entries, "Line DataSet");
         set.setColor(Color.rgb(255, 0, 0));
         set.setLineWidth(2.5f);
         set.setCircleColor(Color.rgb(255, 0, 0));
         set.setCircleRadius(5f);
         set.setFillColor(Color.rgb(255, 0, 0));
         set.setDrawCubic(false);
-        set.setDrawFilled(true);
         set.setFillAlpha(255);
         set.setDrawCircles(false);
         set.setDrawValues(true);
