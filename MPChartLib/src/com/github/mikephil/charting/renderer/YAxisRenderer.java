@@ -373,7 +373,10 @@ public class YAxisRenderer extends AxisRenderer {
                 // c.drawLines(pts, mLimitLinePaint);
             } else {
                 mLimitLinePaint.setStyle(Paint.Style.FILL);
-                c.drawRect(mViewPortHandler.contentLeft(), pts[1], mViewPortHandler.contentRight(), 0f, mLimitLinePaint);
+                float[] zeroLinePos = new float[2];
+                zeroLinePos[1] = 0f;
+                mTrans.pointValuesToPixel(zeroLinePos);
+                c.drawRect(mViewPortHandler.contentLeft(), pts[1], mViewPortHandler.contentRight(), zeroLinePos[1], mLimitLinePaint);
             }
 
             String label = l.getLabel();
