@@ -388,7 +388,7 @@ public class LineChartActivity1 extends DemoBase implements OnSeekBarChangeListe
                 set1.setFillColor(Color.BLACK);
             }
 
-            ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
+            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
             dataSets.add(set1); // add the datasets
 
             // create a data object with the datasets

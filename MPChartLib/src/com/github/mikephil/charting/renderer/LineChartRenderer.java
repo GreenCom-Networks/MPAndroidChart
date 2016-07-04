@@ -73,6 +73,7 @@ public class LineChartRenderer extends LineRadarRenderer {
 
     @Override
     public void drawData(Canvas c) {
+        mLineData = mChart.getLineData();
 
         int width = (int) mViewPortHandler.getChartWidth();
         int height = (int) mViewPortHandler.getChartHeight();
@@ -97,6 +98,7 @@ public class LineChartRenderer extends LineRadarRenderer {
             if (set.isVisible() && set.getEntryCount() > 0)
                 drawDataSet(c, set);
         }
+
 
         c.drawBitmap(mDrawBitmap.get(), 0, 0, mRenderPaint);
     }
