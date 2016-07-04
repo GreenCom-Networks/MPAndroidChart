@@ -120,6 +120,8 @@ public class CombinedChartRenderer extends DataRenderer {
                 data = ((BarChartRenderer)renderer).mChart.getBarData();
             else if (renderer instanceof LineChartRenderer)
                 data = ((LineChartRenderer)renderer).mChart.getLineData();
+            else if (renderer instanceof LineFilledChartRenderer)
+                data = ((LineFilledChartRenderer) renderer).mChart.getLineFilledData();
             else if (renderer instanceof CandleStickChartRenderer)
                 data = ((CandleStickChartRenderer)renderer).mChart.getCandleData();
             else if (renderer instanceof ScatterChartRenderer)
