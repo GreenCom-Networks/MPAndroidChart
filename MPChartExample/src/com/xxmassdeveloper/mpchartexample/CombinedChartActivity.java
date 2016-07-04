@@ -54,7 +54,7 @@ public class CombinedChartActivity extends DemoBase {
         
         // draw bars behind lines
         mChart.setDrawOrder(new DrawOrder[] {
-                DrawOrder.LINE_FILLED, DrawOrder.BAR, DrawOrder.LINE,  DrawOrder.BUBBLE, DrawOrder.CANDLE,  DrawOrder.SCATTER
+               DrawOrder.BAR, DrawOrder.LINE,  DrawOrder.BUBBLE, DrawOrder.CANDLE,  DrawOrder.SCATTER,  DrawOrder.LINE_FILLED
         });
 
         YAxis rightAxis = mChart.getAxisRight();
