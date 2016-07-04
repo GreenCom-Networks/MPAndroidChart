@@ -354,21 +354,27 @@ public class YAxisRenderer extends AxisRenderer {
             if (!l.isEnabled())
                 continue;
 
-            mLimitLinePaint.setStyle(Paint.Style.STROKE);
             mLimitLinePaint.setColor(l.getLineColor());
-            mLimitLinePaint.setStrokeWidth(l.getLineWidth());
-            mLimitLinePaint.setPathEffect(l.getDashPathEffect());
 
             pts[1] = l.getLimit();
 
             mTrans.pointValuesToPixel(pts);
 
-            limitLinePath.moveTo(mViewPortHandler.contentLeft(), pts[1]);
-            limitLinePath.lineTo(mViewPortHandler.contentRight(), pts[1]);
+            if(!l.isFilled()) {
+                mLimitLinePaint.setStyle(Paint.Style.STROKE);
+                mLimitLinePaint.setStrokeWidth(l.getLineWidth());
+                mLimitLinePaint.setPathEffect(l.getDashPathEffect());
 
-            c.drawPath(limitLinePath, mLimitLinePaint);
-            limitLinePath.reset();
-            // c.drawLines(pts, mLimitLinePaint);
+                limitLinePath.moveTo(mViewPortHandler.contentLeft(), pts[1]);
+                limitLinePath.lineTo(mViewPortHandler.contentRight(), pts[1]);
+
+                c.drawPath(limitLinePath, mLimitLinePaint);
+                limitLinePath.reset();
+                // c.drawLines(pts, mLimitLinePaint);
+            } else {
+                mLimitLinePaint.setStyle(Paint.Style.FILL);
+                c.drawRect(mViewPortHandler.contentLeft(), pts[1], mViewPortHandler.contentRight(), 0f, mLimitLinePaint);
+            }
 
             String label = l.getLabel();
 

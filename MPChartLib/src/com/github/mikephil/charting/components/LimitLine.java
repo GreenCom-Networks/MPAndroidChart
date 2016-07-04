@@ -23,6 +23,9 @@ public class LimitLine extends ComponentBase {
     /** the width of the limit line */
     private float mLineWidth = 2f;
 
+    /** indicate if limit line is filled or not */
+    private boolean mFilled = false;
+
     /** the color of the limit line */
     private int mLineColor = Color.rgb(237, 91, 91);
 
@@ -211,5 +214,23 @@ public class LimitLine extends ComponentBase {
      */
     public String getLabel() {
         return mLabel;
+    }
+
+
+    /**
+     * indicate if limit line if filled to zero line or not
+     * @return boolean
+     */
+    public boolean isFilled() {
+        return mFilled;
+    }
+
+
+    /**
+     * set limit line fill to zero line
+     * @param mFilled
+     */
+    public void setFilled(boolean mFilled) {
+        this.mFilled = mFilled;
     }
 }
